@@ -1,0 +1,14 @@
+#! /bin/bash
+
+set -e
+
+
+PAR=${APPDIR}/application
+export PAR=${PAR}
+
+for dir in ${PAR}/dropbox-*/     # list directories in the form "/tmp/dirname/"
+do
+    dir=${dir%*/}
+    exec "${PAR}/${dir##*/}/dropboxd" "start -i $@"
+    break;
+done
